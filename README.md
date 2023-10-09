@@ -2,113 +2,51 @@
 
 # Calorie Counter Web Application
 
-
 ## Overview
 
-This web application is a Calorie Counter that helps users track their calorie intake and burned calories through various activities. Users can register, log in, add personal details (such as weight, height, and age), calculate their BMI (Body Mass Index), and track their calorie consumption based on their activities.
+The Calorie Counter Web Application is designed to help users manage their calorie intake and monitor their daily activities' impact on their health. It provides a simple and user-friendly interface for users to register, log in, add their personal details, calculate their BMI, and track their calorie consumption through various activities.
 
-The project is built using Flask, SQLAlchemy for database management, and integrates with the Nutritionix API to provide nutritional information for activities.
+This project is built using Flask, SQLAlchemy for database management, and integrates with the Nutritionix API to fetch nutritional data for different activities.
 
 ## Features
 
-- User registration and authentication.
-- User profile management (adding and updating personal details).
-- BMI calculation.
-- Tracking of burned calories through various activities.
-- Nutritional information for activities provided by the Nutritionix API.
+- **User Registration**: Users can create accounts by providing a username, email, and password.
 
-## Installation
+- **User Authentication**: Registered users can log in securely.
 
-1. Clone the repository:
+- **Personal Details**: Users can add and update their personal details, including gender, weight, height, and age.
 
-```bash
-git clone https://github.com/yourusername/calorie-counter.git
+- **BMI Calculation**: The application calculates the user's BMI based on the provided weight and height.
+
+- **Calorie Tracking**: Users can track their calorie consumption by logging various physical activities.
+
+- **Nutritional Data**: Nutritional information for activities is fetched from the Nutritionix API.
+
+
+
+Configure the environment variables:
+
+   - Create a `.env` file in the project root directory.
+   - Add your Nutritionix API credentials to the `.env` file.
+
+```env
+NUTRITION_API_KEY=your_api_key_here
+NUTRITION_API_ID=your_api_id_here
+SECRET_KEY=your_secret_key_here
 ```
 
-2. Create a virtual environment:
-
-```bash
-python -m venv venv
-```
-
-3. Activate the virtual environment:
-
-```bash
-# On Windows
-venv\Scripts\activate
-
-# On macOS and Linux
-source venv/bin/activate
-```
-
-4. Install the required dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-5. Create the SQLite database:
-
-```bash
-flask db create
-```
-
-6. Start the development server:
-
-```bash
-flask run
-```
 
 ## Usage
 
-1. Access the application in your web browser at `http://localhost:5000/`.
+1. Register for a new account or log in with an existing one.
 
-2. Register for a new account or log in with an existing one.
+2. Add your personal details, including gender, weight, height, and age.
 
-3. Add your personal details, such as weight, height, and age.
+3. Calculate your BMI based on the provided details.
 
-4. Calculate your BMI and track your calorie consumption through various activities.
+4. Log various physical activities to track calorie consumption.
 
-5. Log out when done.
+5. Log out when you're finished.
 
-## Contributing
 
-Contributions to this project are welcome. You can follow these steps to contribute:
 
-1. Fork the repository.
-
-2. Create a new branch for your feature or bug fix:
-
-```bash
-git checkout -b feature/your-feature-name
-```
-
-3. Make your changes and commit them:
-
-```bash
-git commit -m "Add your commit message here"
-```
-
-4. Push your changes to your forked repository:
-
-```bash
-git push origin feature/your-feature-name
-```
-
-5. Open a pull request to the main repository.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Special thanks to [Nutritionix](https://www.nutritionix.com/) for providing the Nutritionix API for nutritional data.
-- Built with [Flask](https://flask.palletsprojects.com/).
-- Inspired by healthy living and fitness.
-
-```
-
-You can replace `"yourusername"` with your actual GitHub username in the badges and throughout the document. Additionally, make sure to update any placeholders with the actual details of your project.
-
-Feel free to enhance this README with more details about your project, instructions for deploying it, screenshots, and any other relevant information.
