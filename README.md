@@ -8,6 +8,10 @@ The Calorie Counter Web Application is designed to help users manage their calor
 
 This project is built using Flask, SQLAlchemy for database management, and integrates with the Nutritionix API to fetch nutritional data for different activities.
 
+## Introduction Video of the Website
+
+
+
 ## Features
 
 - **User Registration**: Users can create accounts by providing a username, email, and password.
@@ -22,7 +26,21 @@ This project is built using Flask, SQLAlchemy for database management, and integ
 
 - **Nutritional Data**: Nutritional information for activities is fetched from the Nutritionix API.
 
+## Setup
 
+1. Clone the repository to your local machine.
+
+2. Install the required packages using `pip`:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run the application:
+
+   ```bash
+   python main.py
+   ```
 
 Configure the environment variables:
 
