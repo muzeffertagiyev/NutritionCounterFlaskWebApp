@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+  /* font-family: 'Poppins',sans-serif; */
+} 
+
+body{
+  background-color: rgba(39, 142, 212, 0.048);
+}
+
+.nav-menu a:hover,
+.nav-menu .active,
+.nav-menu .active:focus,
+.nav-menu li:hover>a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-menu a:hover i,
+.nav-menu .active i,
+.nav-menu .active:focus i,
+.nav-menu li:hover>a i {
+  color: #149ddd;
+}
+
+.nav-link{
+  font-size: large;
+}
+/* Custom styles for the content container */
+.content-container {
+  padding-top: 80px; /* Adjust this value based on your navbar height */
+}
+
+.form-select.form-control {
+  padding: 0.375rem 1.75rem; /* Adjust the padding as needed */
+  line-height: 1.5;
+  border-radius: 18px;
+}
+
+/*  */
+
+/* Increase the z-index of the navigation bar */
+.nav-menu {
+  z-index: 1000;
+}
+
+.navbar-collapse {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-inline {
+  margin-right: 20px;
+}
+
+.top-container{
+  background-image: url('../img/img-02.jpeg'); /* Replace with the path to your image file */
+  background-size: cover; /* This will cover the entire container with the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-position: center; /* Center the image within the container */
+  border-radius: 3%;
+  height: 500px;
+}
+
+.box-calculator a{
+  transition: all 0.5s ease;
+  background-color: #8dc63f;
+  padding: 20px 20px 5px 20px;
+  border-radius: 2%;
+  text-decoration: none;
+}
+.box-calculator h3 {
+  margin-top:8px ;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+  color: #fff;
+}
+.box-calculator img{
+  vertical-align: middle;
+  border: 0;
+}
+
+.box-calculator a:hover{
+  background-color: #29abe0;
+
+}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %} - Calorie By Activities{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calculator-forms.css')}}">
+{% endblock %}
+
+{% block content %}
+{% if request.endpoint == 'calorie_by_activities' %}
+<body class="bmi-body">
+{% else %}
+<body>
+{% endif %}
+    <div class="form-container">
+        <form class="form" action="{{ url_for('calorie_by_activities',username=current_user.username) }}" method="POST">
+
+            <div class="title">Calorie By Activities</div>
+            <br>
+            <div class="subtitle">Tell me What exercises have you done: </div>
+            <div class="sub-subtitle">Example: I ran 5k and cycled 20 minutes </div>
+            
+            {{ form.csrf_token }}
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {%for category, message in messages%}
+                        <div class="alert alert-{{category}} smaller-text" role="alert" id="flash-message">
+                        {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        <br><br>
+
+        <div class="input-container ic1">
+            {{ form.query(placeholder='',class='input', required="required") }}
+            <div class="cut"></div>
+            {{form.query.label(class='placeholder')}}
+        </div>
+
+        <button type="text" class="submit">Submit</button>
+    </form>
+    
+  </div>
+</body>
+{% endblock %}

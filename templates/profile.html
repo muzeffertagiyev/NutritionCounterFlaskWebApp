@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+
+{% block title %} - {{user.username.title()}}/Profile {% endblock %}
+{% block styles %}
+{{super()}}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pop-up.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+  <div class="container">
+    <h1 class="display-4"> Profile </h1>
+    
+        {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  {%for category, message in messages%}
+                    <div class="alert alert-{{category}}" role="alert" id="flash-message">
+                      {{message}}
+                    </div>
+                  {% endfor %}
+              {% endif %}
+        {% endwith %}
+      
+    <hr class="my-4">
+        <h5>Username : {{user.username}} </h5>
+        <h5>Email : {{user.email}}</h5>
+        <a class="btn btn-warning btn-lg mr-2 mt-5" href="{{url_for('change_username',username=current_user.username)}}" role="button">Change Username</a>
+        <a class="btn btn-success btn-lg mr-2 mt-5" href="{{url_for('reset_password',username=current_user.username)}}" role="button">Reset Password</a>
+    <hr class="my-4">
+        <h5>Gender : {{user.gender}} </h5>
+        <h5>Weight By KG : {{user.weight}} </h5>
+        <h5>Height By CM : {{user.height}}</h5>
+        <h5>Age : {{user.age}} </h5>
+        <a class="btn btn-primary btn-lg mr-2 mt-5" href="{{url_for('update_details',username=current_user.username)}}" role="button">Update Details</a>    
+        <a class="btn btn-success btn-lg mr-2 mt-5" href="{{url_for('update_birthday',username=current_user.username)}}" role="button">Update Birthday</a>    
+    <hr class="my-4">
+        <a class="btn btn-danger btn-lg" onclick="openModal()" href="#" role="button">Delete Account</a>
+  </div>
+</div>
+
+<!-- For confirmation pop-up -->
+<div id="deleteConfirmationModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+    <div class="modal-buttons">
+      <a class="btn btn-danger" href="{{ url_for('delete_user', user_id=current_user.id) }}">Delete</a>
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/hide_flash.js')}}"></script>
+<script src="{{ url_for('static', filename='js/pop-up.js')}}"></script>
+{% endblock %}
+

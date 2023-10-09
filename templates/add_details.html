@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+
+{% block title %} - 
+{% if request.endpoint == 'add_details'%}
+Add Details
+{% elif request.endpoint == 'update_birthday' %}
+Update Birthday/{{current_user.username}}
+{%else%}
+Update Details/{{current_user.username}}
+{%endif%}
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/authentication.css')}}">
+<style>
+  /* Custom CSS for adding margin between label and input */
+  .field label {
+    margin-right: 15px; /* Adjust the margin as needed */
+    color: #3498db; /* Text color for labels */
+    font-weight: 600;
+  }
+  .authentication-section{
+    background: rgb(223, 245, 219);
+  }
+  .content{
+  background:rgb(241, 245, 225);
+}
+  /* Style for form fields */
+  .field input {
+    background: #f2f2f2; /* Background color for input fields */
+    /* color: #333; Text color for input fields */
+  }
+
+  /* Style for submit/update button */
+  .authentication-btn {
+    background: #3498db; /* Button background color */
+    color: #fff; /* Button text color */
+    transition: background 0.3s, color 0.3s; /* Smooth transition */
+  }
+
+  /* Hover effect for button */
+  .authentication-btn:hover {
+    background: #2980b9; /* Button background color on hover */
+    color: black;
+    box-shadow: inset 2px 2px 5px #BABECC,
+             inset -5px -5px 10px #ffffff73;
+  }
+
+
+</style>
+{% endblock %}
+
+
+{% block content %}
+{% if request.endpoint in ['add_details','update_details','update_birthday'] %}
+<body class="authentication-section">
+{% else %}
+<body>
+{% endif %}
+
+<div class="form-container">
+  <div class="content">
+    {% if request.endpoint == 'update_birthday'%}
+      <div class="text">Update Birthday Form</div>
+    {% else %}
+      <div class="text">Details Form</div>
+    {% endif %}
+
+    {% if request.endpoint == 'add_details' %}
+      <form class="authentication-form" action="{{ url_for('add_details')}}" method="POST">
+    {% elif request.endpoint == 'update_birthday'%}
+      <form class="authentication-form" action="{{ url_for('update_birthday',username=current_user.username)}}" method="POST">
+    {% else %}
+      <form class="authentication-form" action="{{ url_for('update_details',username=current_user.username)}}" method="POST">
+    {% endif %}
+      {{ form.csrf_token }}
+      {{ birthday_form.csrf_token }}
+      
+      {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              {%for category, message in messages%}
+                <div class="alert alert-{{category}} smaller-text" role="alert" id="flash-message">
+                  {{message}}
+                </div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+
+        {% if form.weight_kg.errors %}
+            {% for error in form.weight_kg.errors %}
+              <div class="alert alert-danger mt-2 smaller-text" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.height_cm.errors %}
+            {% for error in form.height_cm.errors %}
+              <div class="alert alert-danger mt-2 smaller-text" role="alert">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+      <br><br>
+      
+
+      {% if request.endpoint in ['add_details', 'update_details']%}
+        <div class="field">
+          {{ form.gender.label }}
+          {{ form.gender(class="form-control", required="required") }}
+        </div>
+        <div class="field">
+          {{ form.weight_kg.label }}
+          {{ form.weight_kg(class="form-control", placeholder="Weight By KG", required="required") }}
+        </div>
+        <div class="field">
+          {{ form.height_cm.label }}
+          {{ form.height_cm(class="form-control", placeholder="Height By CM", required="required") }}
+        </div>
+      {% endif %}
+
+      {% if request.endpoint in ['add_details', 'update_birthday']%}
+        <!-- Birthday fields -->
+        <br>
+        <h3>Birth Date</h3>
+        <br>
+        <div class="field">
+          
+          {{ birthday_form.birth_day.label }}
+          {{ birthday_form.birth_day(class="form-control") }}
+        </div>
+        <div class="field">
+          
+          {{ birthday_form.birth_month.label }}
+          {{ birthday_form.birth_month(class="form-control") }}
+        </div>
+        <div class="field">
+          
+          {{ birthday_form.birth_year.label }}
+          {{ birthday_form.birth_year(class="form-control") }}
+        </div>
+
+        {% if request.endpoint == 'add_details'%}
+        <button class="authentication-btn">Submit Details</button>
+        {% else %}
+        <button class="authentication-btn">Update Birthday</button>
+        {%endif%}
+
+      {% else %}
+        <button class="authentication-btn">Update Details</button>
+      {% endif %}
+
+    </form>
+  </div>
+</div>
+</body>
+{% endblock %}

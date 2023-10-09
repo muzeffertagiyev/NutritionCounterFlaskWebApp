@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% block title %} - {{username.title()}}{% endblock %}
+{% block styles %}
+{{super()}}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron text-center mt-5">
+  <div class="container">
+    <img src="{{ url_for('static', filename='img/man-face.png')}}"  width="180px" alt="man-face icon" style="margin-right: 80px;"> 
+    <img src="{{ url_for('static', filename='img/woman-face.png')}}"  width="180px" alt="woman-face icon"> 
+
+    <h1 class="display-4"> Calorie Counter </h1>
+    <hr class="my-4">
+  </div>
+
+  <div class="d-flex justify-content-center mt-4">
+    <div class="d-flex justify-content-center align-items-center box-calculator mr-4"> 
+      
+      <a href="{{url_for('calorie_by_activities',username=current_user.username)}}">
+      
+        <img src="{{ url_for('static', filename='img/cal-burned.png')}}"  width="80px" alt="counter icon"> 
+        <h3>Calorie burned <br>by activities</h3>
+      </a>
+    </div>
+    <div class="d-flex justify-content-center align-items-center box-calculator mr-4"> 
+      <a href="{{url_for('bmi_body_calc')}}">
+        <img src="{{ url_for('static', filename='img/bmi-calc.png')}}"  width="80px" alt="counter icon"> 
+        <h3>Bmi body mass<br>calculator</h3>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="container mb-5">
+  <div class="row">
+    <div class="col-sm-12">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {%for category, message in messages%}
+              <div class="alert alert-{{category}}" role="alert" id="flash-message">
+                {{message}}
+              </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      {% if exercises.pages > 1 %}
+            <nav aria-label="Pagination">
+              <ul class="pagination justify-content-center">
+                {% if exercises.has_prev %}
+                <li class="page-item">
+                  <a class="page-link" href="{{ url_for('user', username=current_user.username,page=exercises.prev_num) }}" tabindex="-1">Previous</a>
+                </li>
+                {% else %}
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                  </li>
+                {% endif %}
+          {% for num in exercises.iter_pages() %}
+            {% if num %}
+              {% if exercises.page == num %}
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">{{ num }} <span class="sr-only">(current)</span></span>
+                </li>
+              {% else %}
+                <li class="page-item">
+                  <a class="page-link" href="{{ url_for('user',username=current_user.username, page=num) }}">{{ num }}</a>
+                </li>
+              {% endif %}
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link">...</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+            {% if exercises.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('user', username=current_user.username, page=exercises.next_num) }}">Next</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link">Next</span>
+              </li>
+            {% endif %}
+            </ul>
+           </nav>
+          {% endif %}
+      
+        <div class="table-responsive-sm">
+          <table class="table">
+            <thead>
+              
+              <th scope="col">Exercise</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Calorie</th>
+              <th scope="col">Date</th>
+              <th scope="col">Time</th>
+            </thead>
+        </div>
+            <tbody>
+
+              {% for exercise in exercises %}
+                <tr>
+                  <td>{{exercise.exercise}}</td>
+                  <td>{{exercise.duration}} minutes</td>
+                  <td>{{exercise.calories}}</td>
+                  <td>{{exercise.date}}</td>
+                  <td>{{exercise.time}}</td>
+                  <td><a href="{{url_for('delete_exercise',id=exercise.id)}}">Delete</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+          {% if exercises.pages > 1 %}
+          <nav aria-label="Pagination">
+            <ul class="pagination justify-content-center">
+              {% if exercises.has_prev %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('user', username=current_user.username,page=exercises.prev_num) }}" tabindex="-1">Previous</a>
+              </li>
+              {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="#" tabindex="-1">Previous</a>
+                </li>
+              {% endif %}
+        {% for num in exercises.iter_pages() %}
+          {% if num %}
+            {% if exercises.page == num %}
+              <li class="page-item active" aria-current="page">
+                <span class="page-link">{{ num }} <span class="sr-only">(current)</span></span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="{{ url_for('user',username=current_user.username, page=num) }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">...</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+          {% if exercises.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="{{ url_for('user', username=current_user.username, page=exercises.next_num) }}">Next</a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <span class="page-link">Next</span>
+            </li>
+          {% endif %}
+          </ul>
+         </nav>
+        {% endif %}
+      
+    </div>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='js/hide_flash.js')}}"></script>
+{% endblock %}
