@@ -1,11 +1,7 @@
-Certainly! Below is a sample README file for your Flask project that you can use on your GitHub account. You can customize it further to include specific details about your project.
 
-```markdown
+
 # Calorie Counter Web Application
 
-![GitHub](https://img.shields.io/github/license/yourusername/calorie-counter)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/yourusername/calorie-counter)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/calorie-counter)
 
 ## Overview
 
