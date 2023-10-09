@@ -12,6 +12,10 @@ This project is built using Flask, SQLAlchemy for database management, and integ
 
 
 
+https://github.com/muzeffertagiyev/NutritionCounterFlaskWebApp/assets/75939608/39092e65-609c-439e-bbdb-2386d65f8a0e
+
+
+
 ## Features
 
 - **User Registration**: Users can create accounts by providing a username, email, and password.
