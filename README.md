@@ -54,7 +54,6 @@ Configure the environment variables:
 ```env
 NUTRITION_API_KEY=your_api_key_here
 NUTRITION_API_ID=your_api_id_here
-SECRET_KEY=your_secret_key_here
 ```
 
 
